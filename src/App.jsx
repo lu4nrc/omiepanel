@@ -4,8 +4,8 @@ import "./App.css";
 
 function App() {
   const [contas, setContas] = useState();
-
-  const url = "https://app.omie.com.br/api/v1/financas/contapagar/";
+  //FIZ UMA CONFIGURACAO DE PROXY DENTRO DO vite.config.js
+  // const url = "https://app.omie.com.br/api/v1/financas/contapagar/";
   const data = {
     call: "ListarContasPagar",
     app_key: "1626665706666",
@@ -13,11 +13,10 @@ function App() {
     param: [{ pagina: 1, registros_por_pagina: 20, apenas_importado_api: "N" }],
   };
 
-  fetch(url, {
+  fetch("/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      mode: "no-cors",
     },
     body: JSON.stringify(data),
   })
@@ -27,7 +26,11 @@ function App() {
     })
     .catch((error) => console.error("Erro na requisição:", error));
 
-  return <><Typography>Hello Word</Typography></>;
+  return (
+    <>
+      <Typography>Hello Word</Typography>
+    </>
+  );
 }
 
 export default App;
